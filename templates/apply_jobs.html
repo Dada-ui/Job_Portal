@@ -1,0 +1,387 @@
+<!Doctype html>
+<html lang="en" class="h-100">
+  {%load static%}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    {% include 'partials/bootcss.html' %}
+    <title>Apply_jobs - Aspirant</title>
+  </head>
+  <body>
+
+    <style>
+        .__uqj {
+            background-color: #d1d1d1;
+            height: 32px;
+            width: 2px;
+            box-shadow: #ffffff;
+        }
+    </style>
+
+    <div class="card-img-overlay py-0 mx-auto">
+
+        <nav class="navbar navbar-expand-lg fixed-top bg-light py-0 mb-5 shadow mx-auto" >
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href='/'>
+                    <h2><b><strong style='color: black;'><img src="/static/search_button.png" width="50" height="40">ASPIRANT</strong></b></h2><span class="sr-only"></span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarnav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {% if request.user.is_authenticated and request.user.role == 'searcher' %}
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav mx-4">
+
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/dashboard" style='color: black;'><strong>DASHBOARD</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/jobs" style='color: black;'><strong>JOBS</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/companies" style='color: black;'><strong>COMPANIES</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/services" style='color: black;'><strong>SERVICES</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/about" style='color: black;'><strong>ABOUT</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/contact" style='color: black;'><strong>CONTACT</strong></a>
+                            </li>
+
+                    </ul>
+
+                    <div class="container-fluid">
+
+                        <ul class="navbar-nav mx-2 justify-content-end">
+
+                            {% if request.user.is_authenticated %}
+
+                                <div class="dropdown mx-2">
+                                    <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/static/pro.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                        <strong>{{user.first_name.upper}}</strong>
+                                    </a>
+
+                                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow text-center">
+                                        <li><a class="dropdown-item" href="/show_profile">My profile</a></li>
+                                        <li><a class="dropdown-item" href="/profile">Edit Profile</a></li>
+                                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                                        <li><a class="dropdown-item" href="#">Delete account</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                                    </ul>
+
+                                </div>
+                                
+                                <li class="nav-item mx-3">
+                                    <a type="hidden" class="text-hidden" href=""></a>
+                                </li>
+
+                            {% else %}
+
+                                <li class="nav-item mx-1">
+                                    <a type="button" class="btn btn-outline-success" href="/login">Login</a>
+                                </li>
+
+                                <li class="nav-item mx-3">
+                                    <a type="button" class="btn btn-outline-success" href="/searcher_register">Register</a>
+                                </li>
+
+                                <li class="__uqj nav-item"></li>
+
+                                <li class="nav-item mx-3">
+                                    <a type="button" class="btn btn-outline-dark" href="/employee">Employeer / Post a job</a>
+                                </li>
+
+                            {% endif %}
+
+                        </ul>
+                        
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                {% if not request.user.is_authenticated %}
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav mx-4">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/jobs" style='color: black;'><strong>JOBS</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/companies" style='color: black;'><strong>COMPANIES</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/services" style='color: black;'><strong>SERVICES</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/about" style='color: black;'><strong>ABOUT</strong></a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="/contact" style='color: black;'><strong>CONTACT</strong></a>
+                            </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="container-fluid">
+
+                    <ul class="navbar-nav mx-2 justify-content-end">
+
+                                <li class="nav-item mx-1">
+                                    <a type="button" class="btn btn-outline-success" href="/login">Login</a>
+                                </li>
+
+                                <li class="nav-item mx-3">
+                                    <a type="button" class="btn btn-outline-success" href="/searcher_register">Register</a>
+                                </li>
+
+                                <li class="__uqj nav-item"></li>
+
+                                <li class="nav-item mx-3">
+                                    <a type="button" class="btn btn-outline-dark" href="/employee">Employeer / Post a job</a>
+                                </li>
+
+                        </ul>
+                        
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </nav>
+
+        <div class="container mt-5 pt-3 pb-2">
+
+            <div class="container">
+                <h5 class="text-center mx-auto col-sm-3 pt-3"><strong>Application is in process..!</strong></h5>
+                <hr class="text-center mx-auto col-sm-3">
+            </div>
+            <div class="row">
+                
+                <div class="col-sm-6">
+                    <div class="card" style="border-color: rgb(5, 5, 5);">
+                    <div class="card-body">
+                        <h5 class="text-center mb-3">Add your contact information</h5>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% if aj %}
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Job role</label>
+                                <input type="text" class="form-control" name="title" id="title" value="{{aj.title}}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Job location</label>
+                                <input type="text" class="form-control" name="location" id="location" value="{{aj.location}}" required>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="first_name" class="form-label">First name</label>
+                                        <input type="text" class="form-control" value="{{user.first_name}}" name="first_name" id="first_name" placeholder="First name" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="last_name" class="form-label">Last name</label>
+                                        <input type="text" class="form-control" value="{{user.last_name}}" name="last_name" id="last_name" placeholder="Last name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="number" class="form-control" name="phone" id="phone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" value="{{user.email}}" name="email" id="email" aria-describedby="emailHelp" required>
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="resume" class="form-label">Resume</label>
+                                <input class="form-control form-control-md" name="resume" id="resume" type="file" required>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card-body">
+
+                        <div class="container">
+                            <h6 class="text-center mx-auto col-sm mt-5 pt-3"><b>You are applying for this job deatils has given below</b></h6>
+                        </div>
+
+                        {% if aj %}
+                        
+                        <div class="row">
+                            
+                            <div class="card px-auto py-3 mt-3 mb-2" style="width: 35rem; border-color: rgb(5, 5, 5);">
+                                <div class="row justify-content-evenly my-0">
+                                    <div class="col mx-3 my-0">
+                                        <h4 class="card-title"><b>{{aj.title.title}}</b></h4>
+                                    </div>
+                                </div>
+                                <h6 class="card-text mx-3">{{aj.company_name}}, {{aj.location}}.</h6>
+                                <div class="row justify-content-evenly px-2">
+                                    <div class="col-4">
+                                        <div class="metadata salary-snippet-container">
+                                            <div class="attribute_snippet">
+                                                <svg class="mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 13" role="presentation" aria-hidden="true" aria-label="Salary" height="15px">
+                                                    <defs></defs>
+                                                    <path fill="#595959" fill-rule="evenodd" d="M2.45168 6.10292c-.30177-.125-.62509-.18964-.95168-.1903V4.08678c.32693-.00053.6506-.06518.95267-.1903.30331-.12564.57891-.30979.81105-.54193.23215-.23215.4163-.50775.54194-.81106.12524-.30237.18989-.62638.19029-.95365H9.0902c0 .3283.06466.65339.1903.9567.12564.30331.30978.57891.54193.81106.23217.23215.50777.41629.81107.54193.3032.12558.6281.19024.9562.1903v1.83556c-.3242.00155-.6451.06616-.9448.19028-.3033.12563-.5789.30978-.81102.54193-.23215.23214-.4163.50774-.54193.81106-.12332.2977-.18789.61638-.19024.93849H3.99496c-.00071-.32645-.06535-.64961-.19029-.95124-.12564-.30332-.30979-.57891-.54193-.81106-.23215-.23215-.50775-.4163-.81106-.54193zM0 .589843C0 .313701.223858.0898438.5.0898438h12.0897c.2762 0 .5.2238572.5.5000002V9.40715c0 .27614-.2238.5-.5.5H.5c-.276143 0-.5-.22386-.5-.5V.589843zM6.54427 6.99849c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2zm8.05523-2.69917v7.10958H2.75977c-.27615 0-.5.2238-.5.5v.5c0 .2761.22385.5.5.5H15.422c.4419 0 .6775-.2211.6775-.6629V4.29932c0-.27615-.2239-.5-.5-.5h-.5c-.2761 0-.5.22385-.5.5z" clip-rule="evenodd"></path>
+                                                </svg>{{aj.package}} a year
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="metadata">
+                                            <div class="attribute_snippet">
+                                                <svg class="mx-2" viewBox="0 0 14 13" fill="none" role="presentation" xmlns="http://www.w3.org/2000/svg" aria-label="Job type" aria-hidden="true" height="15px">
+                                                    <path fill="#595959" fill-rule="evenodd" d="M4.50226.5c-.27614 0-.5.223858-.5.5v2.1H.5c-.276142 0-.5.22386-.5.5v1.9h14V3.6c0-.27614-.2239-.5-.5-.5h-3.4977V1c0-.276142-.22389-.5-.50004-.5h-5Zm4.19962 2.6H5.30344V1.8h3.39844v1.3Z" clip-rule="evenodd"></path>
+                                                    <path fill="#595959" d="M5.70117 6.80005H0v5.20005c0 .2761.223857.5.5.5h13c.2761 0 .5-.2239.5-.5V6.80005H8.30117v.80322c0 .27614-.22386.5-.5.5h-1.6c-.27614 0-.5-.22386-.5-.5v-.80322Z"></path>
+                                                </svg>{{aj.Experience}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="metadata">
+                                            <div class="attribute_snippet">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="mx-2" fill="none" viewBox="0 0 14 15" role="presentation" aria-hidden="true" aria-label="Shift" height="15px">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 14.5C10.866 14.5 14 11.366 14 7.5C14 3.63401 10.866 0.5 7 0.5C3.13401 0.5 0 3.63401 0 7.5C0 11.366 3.13401 14.5 7 14.5ZM6.2496 4.25C6.2496 4.11193 6.36153 4 6.4996 4H7.2996C7.43767 4 7.5496 4.11193 7.5496 4.25V7.62406L9.62708 8.82349C9.74665 8.89252 9.78762 9.04542 9.71858 9.16499L9.31858 9.85781C9.24955 9.97739 9.09665 10.0184 8.97708 9.94932L6.25028 8.375H6.2496V8.37461L6.24805 8.37371L6.2496 8.37102V4.25Z" fill="#595959"></path>
+                                                </svg>{{aj.job_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col mx-1">
+                                    <p class="card-text mx-1 my-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-2" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+                                            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                                        -</svg>
+                                        {{aj.qualifications}}
+                                    </p>
+                                </div>
+                                <p class="card-text mx-3 my-0"><strong>Benefits - </strong>{{aj.benefits}}</p>
+                                <p class="card-text mx-3 my-0"><strong>Description :</strong></p>
+                                <p class="card-text mx-5 my-0">{{aj.description}}</p>
+                                <p class="card-text mx-3 my-0"><b>About company : </b></p>
+                                <p class="card-text mx-5 my-0">{{aj.company_description}}</p>
+                                <p class="card-text mx-3 my-0"><b>Website - </b>{{aj.website}}</p>
+                                <p class="card-text mx-3 my-0"><b>Posted_at - </b>{{aj.created_at}}</p>
+                                <p class="card-text mx-3 my-0"><b>Last_date - </b>{{aj.last_date}}</p>
+                            </div>
+                            
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <footer class="footer mt-auto py-5 bg-light">
+
+            <div class="container py-4 py-md-2 px-4 px-md-3">
+
+              <div class="row">
+
+                <div class="col-lg-3 mb-3">
+
+                  <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="">
+                    <span class="fs-5"><strong>Aspirant</strong></span>
+                  </a>
+
+                  <ul class="list-unstyled small text-muted">
+                    <li class="mb-2">Designed and built with all the love in the world by the <a href="">Aspirant team</a> with the help of <a href="">our contributors</a>.</li>
+                    <li class="mb-2">Code licensed <a href="" target="" rel="">MIT</a>, docs <a href="" target="" rel="">CC BY 3.0</a>.</li>
+                    <li class="mb-2">Currently v5.2.0.</li>
+                  </ul>
+
+                </div>
+                <div class="col-5 col-lg-2 offset-lg-1 mb-3">
+                  <h5>Links</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="">Home</a></li>
+                    <li class="mb-2"><a href="">Docs</a></li>
+                    <li class="mb-2"><a href="">Examples</a></li>
+                    <li class="mb-2"><a href="">Icons</a></li>
+                    <li class="mb-2"><a href="">Themes</a></li>
+                    <li class="mb-2"><a href="">Blog</a></li>
+                    <li class="mb-2"><a href="">Swag Store</a></li>
+                  </ul>
+                </div>
+                <div class="col-5 col-lg-2 mb-3">
+                  <h5>Guides</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="">Getting started</a></li>
+                    <li class="mb-2"><a href="">Starter template</a></li>
+                    <li class="mb-2"><a href="">Webpack</a></li>
+                    <li class="mb-2"><a href="">Parcel</a></li>
+                    <li class="mb-2"><a href="">Vite</a></li>
+                  </ul>
+                </div>
+                <div class="col-5 col-lg-2 mb-3">
+                  <h5>Projects</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="">Bootstrap 5</a></li>
+                    <li class="mb-2"><a href="">Bootstrap 4</a></li>
+                    <li class="mb-2"><a href="">Icons</a></li>
+                    <li class="mb-2"><a href="">RFS</a></li>
+                    <li class="mb-2"><a href="">npm starter</a></li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="app-cont text-center">
+                <a href="https://play.google.com/store/apps/" target="_blank">
+                    <img src="https://static.naukimg.com/s/0/0/i/new-homepage/android-app.png" height="44" width="151">
+                </a>
+                <a href="https://itunes.apple.com/in/app/" target="_blank">
+                    <img src="https://static.naukimg.com/s/0/0/i/new-homepage/ios-app.png" height="44" width="151">
+                </a>
+            </div>
+
+        </footer>
+
+    </div>
+        
+    {% include 'partials/bootjs.html' %}
+
+    <script src="{% static 'script.js' %}" type="text/javascript"> </script>
+
+  </body>
+
+</html>

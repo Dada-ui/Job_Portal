@@ -1,0 +1,487 @@
+<!Doctype html>
+<html lang="en" class="h-100">
+  {%load static%}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    {% include 'partials/bootcss.html' %}
+    <title>Home - Aspirant</title>
+  </head>
+  <body>
+
+    <style>
+        .__uqj {
+            background-color: #d1d1d1;
+            height: 32px;
+            width: 2px;
+            box-shadow: #ffffff;
+        }
+    </style>
+
+    <div class="card-img-overlay py-0 mx-auto">
+
+        <nav class="navbar navbar-expand-lg fixed-top bg-light py-0 mb-5 shadow mx-auto" >
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href='/'>
+                    <h2><b><strong style='color: black;'><img src="/static/search_button.png" width="50" height="40">ASPIRANT</strong></b></h2><span class="sr-only"></span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarnav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav mx-4">
+                        
+                        {% if request.user.is_authenticated and request.user.role == 'employee' %}
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="/home" style='color: black;'><strong>HOME</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/jobs" style='color: black;'><strong>JOBS</strong></a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="/companies" style='color: black;'><strong>COMPANIES</strong></a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="/services" style='color: black;'><strong>SERVICES</strong></a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="/about" style='color: black;'><strong>ABOUT</strong></a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="/contact" style='color: black;'><strong>CONTACT</strong></a>
+                        </li>
+                        <li class="nav-item col-2">
+                            <a class="nav-link" href="/add_jobs" style='color: black;'><strong>ADD JOBS</strong></a>
+                        </li>
+
+                        {% endif %}
+
+                    </ul>
+
+                    <div class="container-fluid">
+
+                        <ul class="navbar-nav mx-2 justify-content-end">
+
+                            {% if user.is_authenticated %}
+                            <div class="dropdown mx-2">
+                                <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/static/pro.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                    <strong>{{user.first_name.upper}}</strong>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow text-center">
+                                    <li><a class="dropdown-item" href="/applicants">Applicants</a></li>
+                                    <li><a class="dropdown-item" href="/find">Find Resumes</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Delete account</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                                </ul>
+                            </div>
+                            <li class="nav-item mx-3">
+                                <a type="hidden" class="text-hidden" href=""></a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item mx-1">
+                                <a type="button" class="btn btn-outline-success" href="/login">Login</a>
+                            </li>
+
+                            <li class="nav-item mx-3">
+                                <a type="button" class="btn btn-outline-success" href="/searcher_register">Register</a>
+                            </li>
+
+                            <li class="__uqj nav-item"></li>
+
+                            <li class="nav-item mx-3">
+                                <a type="button" class="btn btn-outline-dark" href="/employee">Employeer / Post a job</a>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="container mt-5 pt-5 pb-2">
+            <div class="text-center qsb-title">
+                <strong><h1 style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Find your dream job</h1></strong>
+                <h6 style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">5 lakh+ jobs for you to explore</h6>
+            </div>
+        </div>
+
+        <div class="relative col-sm-9 mx-auto">
+
+            <div class="col-lg align-items-center">
+
+                <style>
+                    .sb {
+                        padding: 15px;
+                        backdrop-filter: blur(15px);
+                        background-color: transparent;
+                    }
+                </style>
+
+                <div class="sb shadow rounded">
+                    <div class="container-fluid">
+                        <form method='get' action="/search" class="d-flex">
+                            <input class="form-control form-control-lg me-1 shadow" id="query" type="search" style='border-color: black;' placeholder="Enter skills . . ." aria-label="Search" name="query">
+                            <input class="form-control form-control-lg me-1 shadow" id="location" type="search" style='border-color: black;' placeholder="Enter location . . ." aria-label="Search" name="location">
+                            <button class="btn btn-light shadow" style='border-color: black;' type="submit"><img src="/static/search_button.png" width="29" height="29"></button>
+                        </form>
+                    </div>
+                </div>
+                            
+            </div>
+
+        </div>
+
+        <div class="container mt-3 pb-3">
+            <h3 class="text-center" style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                Popular searches
+            </h3>
+        </div>
+
+        <div class="relative col-sm-9 mx-auto pb-3">
+
+            <div class="col-lg g-2 align-items-center">
+                            
+                <div class="container-fluid btn-toolbar text-center">
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" title="Remote" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Remote</span><h6>2.4k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Work From Home" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Work from home</span><h6>1.8k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Python" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Python</span><h6>3.1k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="HR" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>HR</span><h6>5.4k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Startup" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Startup</span><h6>1.3k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light btn-lgshadow" href="" title="MNC" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>MNC</span><h6>9.2k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Fresher" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Fresher</span><h6>4.7k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="relative col-sm-8 mx-auto">
+
+            <div class="col-lg g-2 pt-2 align-items-center">
+                            
+                <div class="container-fluid btn-toolbar text-center">
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" title="Artifical Intelligence" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Artifical Intelligence (AI)</span><h6>7.8k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Django" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Django</span><h6>4.6k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Data Science" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Data Science</span><h6>6.1k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Java" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Java</span><h6>5.6k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                    <div class="btn-group me-2" role="group">
+                        <a href="jobs"><button type="button" class="btn btn-light shadow" href="" title="Machine Learning" style="border-radius: 10px 35px; border-color: rgba(0, 0, 0, 0.459);">
+                            <span>Machine Learning (ML)</span><h6>4.5k+ jobs</h6>
+                        </button></a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="relative col-sm-6 mx-auto mt-4 py-3">
+
+            <div class="col-lg pt-2 align-items-center shadow rounded" style="color: rgb(212, 212, 212); border-style: dashed;">
+                            
+                <div class="container-fluid text-center">
+
+                    <div class="container ">
+                        <strong><h5 style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Get contacted by top companies hiring on ASPIRANT.!</h5></strong>
+                        <a type="button" class="btn btn-success shadow mb-2 py-2" href="/jobs">Start Searching right now</a>
+                        <h6 class="pb-1" style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Your chance to build that dream career is here</h6>
+                    </div>
+
+                </div>
+            
+            </div>
+
+        </div>
+
+        <div class="container col-sm-5 mt-4 pb-2">
+            <div class="text-center py-2" style='background-color: transparent padding: 60px; backdrop-filter: blur(100px); background-color: transparent; '>
+                <strong><h5 style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"># Post your resume - It only takes a few seconds #</h5></strong>
+            </div>
+        </div>
+
+        <div class="container mt-5 col-sm-4">
+            <div class="text-center qsb-title"  style='background-color: transparent padding: 15px; backdrop-filter: blur(10px); background-color: transparent; '>
+                <strong><h2 style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; ">Prepare for your interview</h2></strong>
+                <h6 style="color: azure; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class='pb-2'>All companies are hiring right now..!</h6>
+            </div>
+        </div>
+        
+        <div class="relative col-sm mx-auto py-4">
+
+            <div class="col-lg align-items-center">
+                            
+                <div class="container-fluid">
+
+                    <div class="row mx-auto">
+
+                        <div class="col-sm-4 mx-auto">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4>Improve your skills with interview questions</h4>
+                                    <span>Just prepare previous question papers..!</span>
+                                    <img src='/static/interview_page.jpg' class="d-block mx-auto pt-4 text-center" width="250px" height="270px" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 mx-auto">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h5 class="card-title text-center">Interview questions by company</h5>
+
+                                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://www.amazon.jobs/en/"><img src="/static/amazon.jpg" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://www.accenture.com/in-en/careers"><img src="/static/accenture.jpg" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://www.capgemini.com/in-en/careers/"><img src="/static/capgemini.jpg" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="shadow">
+                                                <a href="https://careers.cognizant.com/global/en"><img src="/static/congizant.png" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://www.tcs.com/careers?country=IN&lang=EN"><img src="/static/Tata.png" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="shadow">
+                                                <a href="https://www.hcltech.com/careers"><img src="/static/hcl-logo.jpg" style="width:100%;height:120%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://www2.deloitte.com/global/en.html"><img src="/static/Deloittel.png" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://www.ibm.com/in-en/employment/"><img src="/static/ibm.jpg" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow">
+                                                <a href="https://careers.microsoft.com/us/en"><img src="/static/microsoft.jpeg" style="width:100%;height:100%;"></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="text-center mt-5">
+                                        <a class="link" href="companies"><strong>See all companies -></strong></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mx-auto">
+
+                            <div class="card">
+
+                                <h5 class="card-title text-center mt-3">Interview questions by role</h5>
+
+                                <div class="row g-4 pt-3">
+
+                                    <ul class="text-center">
+                                        <li class="list-group">Software Engineer  (7.2K+ questions)</li>
+                                        <hr class='col-sm-9 mx-auto'>
+                                        <li class="list-group">Business Analyst  (2.8K+ questions)</li>
+                                        <hr class='col-sm-9 mx-auto'>
+                                        <li class="list-group">Consultant  (2.4K+ questions)</li>
+                                        <hr class='col-sm-9 mx-auto'>
+                                        <li class="list-group">Financial Analyst  (894 questions)</li>
+                                        <hr class='col-sm-9 mx-auto'>
+                                        <li class="list-group">Sales & Marketing  (991 questions)</li>
+                                        <hr class='col-sm-9 mx-auto'>
+                                        <li class="list-group">Quality Engineer  (1.3K+ questions)</li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <footer class="footer mt-auto py-5 bg-light">
+
+            <div class="container py-4 py-md-2 px-4 px-md-3">
+
+              <div class="row">
+
+                <div class="col-lg-3 mb-3">
+
+                  <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="">
+                    <span class="fs-5"><strong>Aspirant</strong></span>
+                  </a>
+
+                  <ul class="list-unstyled small text-muted">
+                    <li class="mb-2">Designed and built with all the love in the world by the <a href="">Aspirant team</a> with the help of <a href="">our contributors</a>.</li>
+                    <li class="mb-2">Code licensed <a href="" target="" rel="">MIT</a>, docs <a href="" target="" rel="">CC BY 3.0</a>.</li>
+                    <li class="mb-2">Currently v5.2.0.</li>
+                  </ul>
+
+                </div>
+                <div class="col-5 col-lg-2 offset-lg-1 mb-3">
+                  <h5>Links</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="">Home</a></li>
+                    <li class="mb-2"><a href="">Docs</a></li>
+                    <li class="mb-2"><a href="">Examples</a></li>
+                    <li class="mb-2"><a href="">Icons</a></li>
+                    <li class="mb-2"><a href="">Themes</a></li>
+                    <li class="mb-2"><a href="">Blog</a></li>
+                    <li class="mb-2"><a href="">Swag Store</a></li>
+                  </ul>
+                </div>
+                <div class="col-5 col-lg-2 mb-3">
+                  <h5>Guides</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="">Getting started</a></li>
+                    <li class="mb-2"><a href="">Starter template</a></li>
+                    <li class="mb-2"><a href="">Webpack</a></li>
+                    <li class="mb-2"><a href="">Parcel</a></li>
+                    <li class="mb-2"><a href="">Vite</a></li>
+                  </ul>
+                </div>
+                <div class="col-5 col-lg-2 mb-3">
+                  <h5>Projects</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="">Bootstrap 5</a></li>
+                    <li class="mb-2"><a href="">Bootstrap 4</a></li>
+                    <li class="mb-2"><a href="">Icons</a></li>
+                    <li class="mb-2"><a href="">RFS</a></li>
+                    <li class="mb-2"><a href="">npm starter</a></li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="app-cont text-center">
+                <a href="https://play.google.com/store/apps/" target="_blank">
+                    <img src="https://static.naukimg.com/s/0/0/i/new-homepage/android-app.png" height="44" width="151">
+                </a>
+                <a href="https://itunes.apple.com/in/app/" target="_blank">
+                    <img src="https://static.naukimg.com/s/0/0/i/new-homepage/ios-app.png" height="44" width="151">
+                </a>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <img src='/static/c2.png' class="d-block shadow-lg" width="100%" height="100%" alt="">
+    <img src='/static/c22.png' class="d-block shadow-lg" width="100%" height="100%" alt="">
+        
+    {% include 'partials/bootjs.html' %}
+    <script src="{% static 'script.js' %}" type="text/javascript"> </script>
+  </body>
+</html>
